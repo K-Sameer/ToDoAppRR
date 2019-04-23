@@ -1,7 +1,7 @@
 import {
   ADD_TODO,
   REMOVE_TODO,
-  COMPLETE_TODO,
+  TOGGLE_TODO,
   REMOVE_ALL_TODO,
   SET_VISIBILITY_FILTER,
 } from './actionTypes';
@@ -19,14 +19,13 @@ export const removeTodo = id => ({
   id,
 });
 
-export const completeTodo = id => ({
-  type: COMPLETE_TODO,
+export const toggleTodo = id => ({
+  type: TOGGLE_TODO,
   id,
 });
 
-export const removeAllTodo = id => ({
-  type: REMOVE_ALL_TODO,
-  id,
+export const removeAllTodo = () => ({
+  type: REMOVE_ALL_TODO
 });
 
 export const setVisibilityFilter = filter => ({

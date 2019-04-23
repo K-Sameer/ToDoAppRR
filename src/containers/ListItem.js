@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import { Button } from './Button';
-import { BrowserRouter as Link } from "react-router-dom";
+import Button from './Button';
+import { Link } from 'react-router-dom'
+import MaterialLi from '@material-ui/core/ListItem';
 
-export class ListItem extends Component {
+export default class ListItem extends Component {
   render() {
-    const {removeTodo, todo, completeTodo} = this.props;
+    const {removeTodo, todo, toggleTodo} = this.props;
     return (
-      <li onClick={ () => { return <Link to = {`${todo.id}/:id`}/> } } >
-
-        {todo.text}
+      <MaterialLi>
+        <Link to={todo.id}>{todo.text}</Link>
         <Button onClick={() => removeTodo(todo.id)} buttonText='Delete' />
         <input
           type="checkbox"
-          onChange={() => completeTodo(todo.id)}
+          onChange={() => toggleTodo(todo.id)}
           checked={todo.completed}
         />
-      </li>
+      </MaterialLi>
     );
-    }
+  }
 }

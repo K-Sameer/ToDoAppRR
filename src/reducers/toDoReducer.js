@@ -1,11 +1,15 @@
 import {
     ADD_TODO,
     REMOVE_TODO,
-    COMPLETE_TODO,
+    TOGGLE_TODO,
     REMOVE_ALL_TODO
  } from '../actions/actionTypes'
 
-const INITIAL_DATA = []
+const INITIAL_DATA = [
+    {id:'1', text:'TODO 1 TEXT', completed: true},
+    {id:'2', text:'TODO 2 TEXT', completed: false},
+    {id:'3', text:'TODO 3 TEXT', completed: false}
+]
 
 const toDoReducer = (state=INITIAL_DATA, action) => {
     switch (action.type){
@@ -20,13 +24,13 @@ const toDoReducer = (state=INITIAL_DATA, action) => {
         case REMOVE_TODO:
         return state.filter(todo => todo.id !== action.id);
         
-        case COMPLETE_TODO:
+        case TOGGLE_TODO:
         return state.map(toDo =>
             toDo.id === action.id ? { ...toDo, completed: !toDo.completed } : toDo
           );
 
         case REMOVE_ALL_TODO:
-          return INITIAL_DATA
+          return []
 
         default:
         return state

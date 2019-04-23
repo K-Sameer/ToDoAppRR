@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {ListItem} from "./ListItem";
-import {Button} from './Button';
+import ListItem from "./ListItem";
+import Button from '@material-ui/core/Button';
 import {connect} from "react-redux";
+import { List as MaterialList } from "@material-ui/core";
 
 import {
 	removeTodo,
-	completeTodo,
+	toggleTodo,
 	removeAllTodo,
 	setVisibilityFilter
 	} from '../actions/actionCreator'
@@ -21,27 +22,21 @@ import {bindActionCreators} from 'redux'
 class List extends Component {
 
   render() {
-    const {removeTodo, completeTodo, removeAllTodo, todos,setVisibilityFilter} = this.props;
-    console.log(this.props)
+    const {removeTodo, toggleTodo, removeAllTodo, todos,setVisibilityFilter} = this.props;
 
     return (
       <div>
-        <ul>
+        <MaterialList>
           {
             todos ?   
-            todos.map(todo => <ListItem
-                todo={todo}
-                key={todo.id}
-                removeTodo={removeTodo}
-                completeTodo={completeTodo}
-              />)
-            : null 
+              todos.map(todo =><ListItem key={todo.id} todo={todo} removeTodo={removeTodo} toggleTodo={toggleTodo}>{todo.text}</ListItem>)
+              : null 
           }        
-        </ul>
-        <Button onClick={removeAllTodo} buttonText='Delete All'/>
-		<Button onClick={() => setVisibilityFilter(SHOW_ALL)} buttonText='Show All'/>
-		<Button onClick={() => setVisibilityFilter(SHOW_COMPLETED)} buttonText='Show Completed'/>
-		<Button onClick={() => setVisibilityFilter(SHOW_ACTIVE)} buttonText='Show Active'/>
+        </MaterialList>
+        <Button type="submit" variant="contained" onClick={removeAllTodo}>Remove All</Button>
+        <Button type="submit" variant="contained" onClick={() => setVisibilityFilter(SHOW_ALL)}>Show All</Button>
+        <Button type="submit" variant="contained" onClick={() => setVisibilityFilter(SHOW_COMPLETED)}>Show Completed</Button>
+        <Button type="submit" variant="contained" onClick={() => setVisibilityFilter(SHOW_ACTIVE)}>Show Active</Button>
       </div>
     );
   }
@@ -67,7 +62,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        removeTodo,completeTodo,removeAllTodo, setVisibilityFilter
+        removeTodo,toggleTodo,removeAllTodo, setVisibilityFilter
     }, dispatch)
 }
 

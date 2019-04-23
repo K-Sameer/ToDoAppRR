@@ -9,15 +9,18 @@ import { Route, Switch } from 'react-router' // react-router v4/v5
 import { BrowserRouter as Router } from "react-router-dom"
 import mainReducer from './reducers/mainReducer';
 import App from './App';
-import {TodoItemDetails} from './containers/TodoItemDetails';
-export const history = createBrowserHistory()
+import TodoItemDetails from './containers/TodoItemDetails';
+import logger from 'redux-logger'
+export const history = createBrowserHistory();
+
 
 const store = createStore(
     mainReducer(history), // root reducer with router state
     {},
     compose(
       applyMiddleware(
-        routerMiddleware(history), // for dispatching history actions
+        routerMiddleware(history),
+        logger
       ),
     )
   )

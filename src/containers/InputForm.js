@@ -1,9 +1,9 @@
-/* eslint-disable react/jsx-filename-extension */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addTodo } from '../actions/actionCreator';
-
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
 
 class InputForm extends Component {
   constructor(props) {
@@ -25,16 +25,19 @@ class InputForm extends Component {
   }
 
   render() {
-    const {handleSubmit, handleChange, state: { value } } = this;
+    const {handleSubmit, handleChange, state: { value }} = this;
     return (
-      <form onSubmit={handleSubmit}>
-        <input
+      
+      <form onSubmit={handleSubmit} style={{display:'flex', justifyContent: 'center'}}>
+        <Input
+          multiline
           type="text"
           value={value}
           onChange={handleChange}
         />
-        <input type="submit" value="Submit" />
+        <Button type="submit" variant="contained" color="primary">ADD</Button>
       </form>
+      
     );
   }
 }
