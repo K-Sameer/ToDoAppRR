@@ -17,13 +17,15 @@ export class InputForm extends Component {
   
   onSubmit(event) {
     event.preventDefault();
-    const {todoId} = this.props;
-    this.props.customAction(todoId,this.state.value);
-    this.setState({ value: '' });
+    this.props.onSubmit(this.state.value);
+    if (this.props.clearOnSubmit) {
+      this.setState({ value: '' });
+    }
   }
 
   render() {
-    const {handleSubmit, handleChange,  state: { value }} = this;
+    const {handleSubmit, handleChange, state: { value }} = this;
+    
     return (
       <form onSubmit={handleSubmit} style={{display:'flex', justifyContent: 'center'}}>
         <Input
@@ -31,8 +33,14 @@ export class InputForm extends Component {
           type="text"
           value={value}
           onChange={handleChange}
+          disabled={this.props.disabled}
         />
-        <Button type="submit" variant="contained" color="primary" >{this.props.buttonText}</Button>
+        <Button 
+          type="submit"
+          variant="contained" 
+          color="primary" 
+          onClick={this.props.onBClick}> {this.props.buttonText}
+        </Button>
       </form>
       
     );

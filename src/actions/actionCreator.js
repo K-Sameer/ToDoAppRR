@@ -9,7 +9,7 @@ import {
 
 const uuidv4 = require('uuid/v4');
 
-export const addTodo = (id,text) => ({
+export const addTodo = (text) => ({
   type: ADD_TODO,
   id: uuidv4(),
   text,

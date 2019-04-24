@@ -14,8 +14,9 @@ class App extends Component {
         <Paper >
           <InputForm 
             initialValue = '' 
-            customAction ={this.props.addTodo} 
+            onSubmit={this.props.addTodo} 
             buttonText = 'Add'
+            clearOnSubmit
           />
           <List/>
         </Paper>
