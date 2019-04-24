@@ -2,6 +2,7 @@ import {
     ADD_TODO,
     REMOVE_TODO,
     TOGGLE_TODO,
+    EDIT_TODO,
     REMOVE_ALL_TODO
  } from '../actions/actionTypes'
 
@@ -21,6 +22,7 @@ const toDoReducer = (state=INITIAL_DATA, action) => {
                 completed: false,
             }
         ]
+
         case REMOVE_TODO:
         return state.filter(todo => todo.id !== action.id);
         
@@ -29,6 +31,11 @@ const toDoReducer = (state=INITIAL_DATA, action) => {
             toDo.id === action.id ? { ...toDo, completed: !toDo.completed } : toDo
           );
 
+        case EDIT_TODO:
+        return state.map(toDo =>
+            toDo.id === action.id ? { ...toDo, text: action.text } : toDo
+          );
+        
         case REMOVE_ALL_TODO:
           return []
 
