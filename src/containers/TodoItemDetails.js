@@ -30,6 +30,9 @@ class TodoItemDetails extends Component {
 
   render() {
     const { todo } = this.props;
+    if (!todo) {
+      return null;
+    }
 
     return (
       <div>     
@@ -53,7 +56,7 @@ class TodoItemDetails extends Component {
 
 const mapStateToProps = (state,ownProps) => {
   return {
-    todo: state.todos.find(todo => todo.id === ownProps.match.params.id)
+    todo: state.todos.find(todo => todo.id === +ownProps.match.params.id)
   };
 };
 

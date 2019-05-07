@@ -3,14 +3,11 @@ import {
     REMOVE_TODO,
     TOGGLE_TODO,
     EDIT_TODO,
-    REMOVE_ALL_TODO
+    REMOVE_ALL_TODO,
+    SET_INITIAL_TODOS
  } from '../actions/actionTypes'
 
-const INITIAL_DATA = [
-    {id:'1', text:'TODO 1 TEXT', completed: true},
-    {id:'2', text:'TODO 2 TEXT', completed: false},
-    {id:'3', text:'TODO 3 TEXT', completed: false}
-]
+const INITIAL_DATA = []
 
 const toDoReducer = (state=INITIAL_DATA, action) => {
     switch (action.type){
@@ -38,6 +35,15 @@ const toDoReducer = (state=INITIAL_DATA, action) => {
         
         case REMOVE_ALL_TODO:
           return []
+
+        case SET_INITIAL_TODOS:
+          return action.todos.map(toDo =>
+              ({
+                id: toDo.id,
+                text: toDo.title,
+                completed: toDo.completed,
+              })
+            );
 
         default:
         return state

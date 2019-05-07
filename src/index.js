@@ -4,6 +4,7 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { applyMiddleware, compose, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import { ConnectedRouter, routerMiddleware } from 'connected-react-router';
 import { Route, Switch } from 'react-router' // react-router v4/v5
 import { BrowserRouter as Router } from "react-router-dom"
@@ -20,15 +21,15 @@ const store = createStore(
     compose(
       applyMiddleware(
         routerMiddleware(history),
+        thunk,
         logger
       ),
     )
   )
 
 ReactDOM.render(
-
     <Provider store={store}>
-        <ConnectedRouter history={history}> { /* place ConnectedRouter under Provider */ }
+        <ConnectedRouter history={history}> 
             <Router> 
             <Switch>
                 <Route exact path="/" render={() => (<App/>)} />

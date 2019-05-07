@@ -5,6 +5,7 @@ import {
   EDIT_TODO,
   REMOVE_ALL_TODO,
   SET_VISIBILITY_FILTER,
+  SET_INITIAL_TODOS
 } from './actionTypes';
 
 const uuidv4 = require('uuid/v4');
@@ -39,3 +40,16 @@ export const setVisibilityFilter = filter => ({
   type: SET_VISIBILITY_FILTER,
   filter,
 });
+
+export const setInitialTodos = (todos) => ({
+  type: SET_INITIAL_TODOS,
+  todos,
+});
+
+export const fetchInitialTodos = () => {
+  return (dispatch) => {
+    return fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      .then(json => dispatch(setInitialTodos(json)))
+  }
+}
