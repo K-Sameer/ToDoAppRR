@@ -12,6 +12,7 @@ export default class ListItem extends Component {
         <Link to={String(todo.id)}>
           {todo.text}
         </Link>
+        <div style={{marginLeft:"auto"}}>
         <Button
           onClick={() => removeTodo(todo.id)}
           buttonText="Delete"
@@ -21,6 +22,7 @@ export default class ListItem extends Component {
           onChange={() => toggleTodo(todo.id)}
           checked={todo.completed}
         />
+        </div>
       </ListItemText>
     );
   }

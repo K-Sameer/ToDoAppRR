@@ -16,7 +16,7 @@ export const history = createBrowserHistory();
 
 
 const store = createStore(
-    mainReducer(history), // root reducer with router state
+    mainReducer(history), 
     {},
     compose(
       applyMiddleware(

@@ -56,7 +56,7 @@ class TodoItemDetails extends Component {
 
 const mapStateToProps = (state,ownProps) => {
   return {
-    todo: state.todos.find(todo => todo.id === +ownProps.match.params.id)
+    todo: state.todos.find(todo => todo.id === +ownProps.match.params.id || todo.id === ownProps.match.params.id)
   };
 };
 

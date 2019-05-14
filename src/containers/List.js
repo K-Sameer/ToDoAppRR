@@ -26,17 +26,26 @@ class List extends Component {
 
     return (
       <div>
-        <MaterialList>
-          {
-            todos ?   
-              todos.map(todo =><ListItem key={todo.id} todo={todo} removeTodo={removeTodo} toggleTodo={toggleTodo}>{todo.text}</ListItem>)
-              : null 
-          }        
-        </MaterialList>
+        <div style={{display:"flex", justifyContent:"space-between", marginTop:"20px"}}>
         <Button type="submit" variant="contained" onClick={removeAllTodo}>Remove All</Button>
         <Button type="submit" variant="contained" onClick={() => setVisibilityFilter(SHOW_ALL)}>Show All</Button>
         <Button type="submit" variant="contained" onClick={() => setVisibilityFilter(SHOW_COMPLETED)}>Show Completed</Button>
         <Button type="submit" variant="contained" onClick={() => setVisibilityFilter(SHOW_ACTIVE)}>Show Active</Button>
+        </div>
+        <MaterialList>
+          {
+            todos ?   
+              todos.map(todo =>
+                <ListItem 
+                  key={todo.id} 
+                  todo={todo} 
+                  removeTodo={removeTodo} 
+                  toggleTodo={toggleTodo}>
+                  {todo.text}
+                </ListItem>)
+              : null 
+          }        
+        </MaterialList>
       </div>
     );
   }

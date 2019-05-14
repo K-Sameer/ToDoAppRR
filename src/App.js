@@ -9,14 +9,15 @@ import List from './containers/List';
 
 class App extends Component {
 
-  componentDidMount(){
-    console.log('COMPONENT DID MOUNT');
-    this.props.fetchInitialTodos();
+  componentDidMount() {
+    if (this.props.todos.length===0){
+      this.props.fetchInitialTodos()
+    } 
   }
 
   render() {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
         <Paper>
           <InputForm
             initialValue=""
@@ -31,5 +32,8 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => ({ todos: state.todos })
+
 const mapDispatchToProps = dispatch => bindActionCreators({ addTodo, fetchInitialTodos  }, dispatch);
-export default connect(null, mapDispatchToProps)(App);
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
